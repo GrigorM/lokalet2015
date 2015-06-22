@@ -81,7 +81,7 @@
       // change the query for the first layer
       var subLayerOptions = {
         sql: "SELECT * FROM njesite_administrative",
-        cartocss: '#njesite_administrative{polygon-fill: #fff;polygon-opacity: 1;line-color: #000000;line-width: 0.5;line-opacity: 0.7;}#njesite_administrative[diferenca>0] {polygon-fill: #8C238A;}#njesite_administrative[diferenca<0] {polygon-fill: #3D82C7;}',
+        cartocss: '#njesite_administrative{polygon-fill: #fff;polygon-opacity: 1;line-color: #000000;line-width: 0.5;line-opacity: 0.7;}#njesite_administrative[diferenca=1] {polygon-fill: #8C238A;}#njesite_administrative[diferenca=-1] {polygon-fill: #3D82C7;}#njesite_administrative[diferenca=2] {polygon-fill: #1D70B8;}#njesite_administrative[diferenca=-2] {polygon-fill: #E3A127;}#njesite_administrative[diferenca=-3] {polygon-fill: #aaaaaa;}',
 		interactivity: "cartodb_id, name, diferenca, ps_lis, pd"
 	  }	  
 
