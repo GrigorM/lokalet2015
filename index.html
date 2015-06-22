@@ -13,7 +13,7 @@
 	<title>Lokalet2015 | Grigor Malo</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
   <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
-  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script> 
   <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
   <![endif]-->
@@ -21,8 +21,9 @@
   <style>
 @font-face{font-family:'Clear Sans Light';src:url(/cartodbjs/fonts/clearsans-light.eot);src:url(fonts/clearsans-light.eot?#iefix) format("embedded-opentype"),url(fonts/clearsans-light.ttf) format("truetype"),url(fonts/clearsans-light.woff) format("woff"),url(fonts/clearsans-light.svg#ClearSans-Light) format("svg");font-style:normal;font-weight:lighter;}
 @font-face{font-family:'Clear Sans';src:url(fonts/clearsans-regular.eot);src:url(fonts/clearsans-regular.eot?#iefix) format("embedded-opentype"),url(fonts/clearsans-regular.ttf) format("truetype"),url(fonts/clearsans-regular.woff) format("woff"),url(fonts/clearsans-regular.svg#ClearSans-Regular) format("svg");font-style:normal;font-weight:normal;}  
-    html, body {width:100%; height:100%; padding: 0 10px; margin: 0; background-color: #ccc;}
+    html, body {width:100%; height:100%; padding: 0 10px; margin: 0; background-color: #ccc; font-family: 'Clear Sans Light';}
     #cartodb-map { width: 50%; height:100%; background-color: #CEC3A4; display: inline-block;}
+	#viz-title { text-transform:uppercase; font-size:27px; position:absolute; width:49%; top:30%; text-align:center; }
 	#data { width: 49%; display; inline-block; display: inline-block;}
 	#details { width: 50%; height:50%; display; inline-block;}
 	.thedata { position: absolute; top: 0; background-color: #ccc;}
@@ -39,7 +40,7 @@
 	rect.mega { fill: #E3A127; }
 	rect.ap { fill: #99BE00; }
 	rect.indy, rect.indy2 { fill: #aaa;  }
-	text { font-family: 'Clear Sans Light'; font-size: 12px; }
+	text { font-size: 12px; }
 	.koalicioni { text-transform:uppercase; font-size:11px;}
 	.qyteti { text-transform:uppercase; font-size:20px;}
 	text.qyteti tspan { text-transform:none; font-size:13px; }
@@ -52,20 +53,6 @@
 	var cityData;
 	var sumTotal;
 	var svgHeight = window.innerHeight;
-	function fixStrings(str){
-		var zanore = ['a', 'e', 'ë', 'i', 'o', 'u', 'y'];
-		for(var i=0; i<str.length; i++){
-			if(str[i] == '�'){
-				/*if(i==0){
-					for(var j=0; j<zanore.length; j++){
-						if(str[1]==zanore[j]) str[i] = 'Ç';
-					}
-				}*/
-				str[i] = 'Ç';
-			}
-		}
-		return str;
-	}	
     function init(){
       // initiate leaflet map
 	  var sublayer; 
@@ -151,7 +138,7 @@
 							.style('font-weight', '700');
 							
 						groups.append('text')
-							.text(function(d){ var t = fixStrings(d[0]); /*d[0].replace('�', 'ë');*/ return t; })
+							.text(function(d){ var t = d[0]; /*d[0].replace('�', 'ë');*/ return t; })
 							.attr('x', function(d, i){ if(b) return (i*w + (w-10)/2); else return i*115 + 50; })
 							.attr('y', function(){ return svgHeight-70; })
 							.attr('text-anchor', 'middle')
@@ -208,6 +195,7 @@
 </head>
 
 <body onload="init()">
+<div id="viz-title">Zgjedhjet lokale 2015</div>
   <div id='data' ></div>
   <div id='cartodb-map' ></div> 
 </body>
