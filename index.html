@@ -82,7 +82,7 @@
       var subLayerOptions = {
         sql: "SELECT * FROM njesite_administrative",
         cartocss: '#njesite_administrative{polygon-fill: #fff;polygon-opacity: 1;line-color: #000000;line-width: 0.5;line-opacity: 0.7;}#njesite_administrative[diferenca=1] {polygon-fill: #8C238A;}#njesite_administrative[diferenca=-1] {polygon-fill: #3D82C7;}#njesite_administrative[diferenca=2] {polygon-fill: #1D70B8;}#njesite_administrative[diferenca=-2] {polygon-fill: #E3A127;}#njesite_administrative[diferenca=-3] {polygon-fill: #aaaaaa;}',
-		interactivity: "cartodb_id, name, diferenca, ps_lis, pd"
+		interactivity: "cartodb_id, name, diferenca, numri_i_votuesve, numri_i_votuesve_total"
 	  }	  
 
       cartodb.createLayer(map, layerUrl)
@@ -117,9 +117,11 @@
 						}
 						var title = svg.append('text').text('Bashkia '+city).attr('x', function(){ return innerWidth/2 - 300; })
 							.attr('y', 100).attr('class', 'qyteti');
-						title.append('tspan').text('Pjesmarrja në votime: ').attr('x', function(){ return innerWidth/2 - 300; })
+						title.append('tspan').text(function(){ var pc = 100*data.numri_i_votuesve/data.numri_i_votuesve_total; pc = pc.toFixed(2); return 'Pjesmarrja në votime: '+pc; })
+							.attr('x', function(){ return innerWidth/2 - 300; })
 							.attr('y', 130);
-						title.append('tspan').text('Vota të numëruara: ').attr('x', function(){ return innerWidth/2 - 300; })
+						title.append('tspan').text(function(){ var pc = 100*sumTotal/data.numri_i_votuesve; pc = pc.toFixed(2); return 'Vota të numëruara: '+pc; })
+							.attr('x', function(){ return innerWidth/2 - 300; })
 							.attr('y', 150);
 						var groups = svg.selectAll('g').data(cityData).enter().append('g');
 						var rects = groups.append('rect')
